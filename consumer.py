@@ -277,7 +277,19 @@ carCascade = cv2.CascadeClassifier('files/HaarCascadeClassifier.xml')
 def saveCar(carID, speed, car_image):
     now = datetime.today().now()
     nameCurTime = now.strftime("%d-%m-%Y-%H-%M-%S-%f")
+
+    # Check if the region of interest (car_image) is not empty
+    if car_image.size == 0:
+        print("Empty region, skipping encoding.")
+        return
+
     _, buffer = cv2.imencode('.jpg', car_image)
+
+    # Check if the encoding was successful
+    if buffer is None or buffer.size == 0:
+        print("Error encoding car image.")
+        return
+
     image_base64 = base64.b64encode(buffer).decode('utf-8')
 
     # Prepare data to insert into MongoDB

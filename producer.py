@@ -24,7 +24,7 @@ def main():
     )
     
     topic1 = 'test'
-    video_path1 = 'files/videoTest.mp4'
+    video_path1 = 'files/a.mp4'
     
     producer_thread = threading.Thread(target=publish_video_to_kafka, args=(producer, topic1, video_path1))
     producer_thread.start()
